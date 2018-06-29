@@ -1,0 +1,190 @@
+
+Input / Output java
+-------------------------
+
+Byte based stream classes
+
+	InputStream		OutputStream
+
+Character based stream classes
+
+	Reader			Writer
+	
+
+	-> keyboard input 
+		- using DataInputStream (byte based stream class)
+		- using InputStreamReader (character based stream class)
+		- using Scanner class
+		- using Console class
+
+
+	-> InputStreamReader and OutputStreamWriter
+
+	-> FileReader and FileWriter
+
+	-> BufferedReader and BufferedWriter
+
+	-> FileInputStream and FileOutputStream
+	
+	-> BufferedInputStream and BufferedOutputStream
+
+
+	read()			write(int)
+	read(byte[])		write(String)
+	read(char[])		write(byte[])
+
+
+==>Formatted Data Streams
+
+	-> DataInputStream and DataOutputStream 
+
+		-> these classes used to read/write primitives and Strings
+		-> we can perform I/O operations in the desired format 					i.e. int, double, Strings
+		-> these Data Streams support binary i/o of primitive 			type values
+
+
+	DataInputStream			DataOutputStream
+
+	int readInt()			void writeInt(int)
+	double readDouble()		void writeDouble(double)
+	byte readByte()			void writeByte(byte)
+	short readShort()		void writeShort(short)
+	float readFloat()		void writeFloat(float)
+	String readLine()		void writeLine()
+	boolean readBoolean()		void writeBoolean()
+	String readUTF()		void writeUTF()
+	...
+	...
+
+
+
+	int[] productid;
+	String[] pname;
+	double[] price;
+	double[] qty;
+
+
+
+
+pname			prices		unit		amount
+java T-shirt		12.32		1		xxx
+java mug		23.10		5		xxx
+java pen		40.12		5		xxx
+java mobile		210.2		2		xxx
+java key chain		12.44		7		xxx
+							--------
+							xxxxx
+							--------
+
+
+
+
+	store.txt
+	-------------
+		Java Mug12.437
+
+
+==>Object Streams
+---------------------------------
+
+	 ObjectInputStream		ObjectOutputStream
+	
+	-> using these stream classes we can perform read/write operations 		on Objects 
+
+Object Serialization
+----------------------------
+	-> Serialization is a process to convert an object to bytes
+	-> Object Serialization is the process of representing a 				"particular state of object" in a serialized bit-stream, 		so that the stream can be written out to an external 		device such as dist file/network
+
+	-> Object Serialization is necessary to save a state of an object 		in to disk/network
+
+How to serialize an Object
+------------------------------------
+	-> in java, the if an object requires to be serialized, it must 		implement java.io.Serializable interface
+
+
+
+		public class Employee implments Seriazable {
+
+			//...
+		}
+
+	**=> the Serializable inerface is an empty interface wit nothing 			declared. its purpose is simply to declare that 			particular object is seriazable
+
+
+
+Angular Framework
+-----------------------------
+
+==> Data Binding
+----------------
+
+	-> communication between component and template
+
+
+	1. String interpolation
+		-> to output some data in template
+
+			{{ tsfield }}
+
+	2. property binding 
+		-> to dynamically bind the value of a tsfield with a DOM 			Property
+
+
+	3. event binding
+		-> to bind a dom event with a typescript method
+
+		(click)="tsmethod()"
+
+		
+	<html>
+	   <head>
+		<title> mytitle </title>
+	   </head>
+
+	   <body>
+		<p> This is some p </p>
+
+		<h1 align="center"> This is heading </h1>
+
+		<div>
+			<p> This is para </p>
+			<ul>
+			  <li> list item 1</li>
+			  <li> list item 2</li>
+			  <li> list item 3</li>
+			</ul>
+		</div>
+     	   </body>
+
+	</html>
+
+
+
+	4. style binding
+
+		-> apply some styles dynamically
+
+		<ele [style.CSSProperty]="tsfield">
+
+		<ele [style.backgroundColor] = " 'orange'  " >
+
+
+	5. class binding
+		-> we can apply some css classes conditionally
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

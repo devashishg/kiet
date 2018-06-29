@@ -1,0 +1,207 @@
+Multithreading
+-----------------------------
+	-> java supports concurrency
+
+
+			Multitasking
+			    |
+	--------------------------------------------------
+	|						|
+    Process based				   Thread Based
+
+Process based  Multitasking
+---------------------
+	-> executing multiple processes at a time
+	-> each process is a independent process
+	-> these processes do not share the resources i.e. memory 
+
+
+Thread based multitasking
+----------------------------------
+	-> executing diff parts of the same program simultaneously
+	-> each part (thread) of the program may or may not share the 		resources with each other
+
+Thread
+---------------
+	-> a group of statements that are executed separatly 
+	-> thread is used to divide a task of an application into separate 		sub processes
+
+	-> every java program runs inside a thread (main thread)
+	-> the main method of java program runs inside a main thread
+
+	-> Thread.currentThread() returns currently running thread
+
+
+Creating a new Thread
+---------------------------
+
+	There are two ways to create a new Thread
+
+a. by extending Thread class
+
+
+	public class MyThread extends Thread{
+
+		public void run(){
+			//code/statement that you would like to execute
+				inside a thread
+		}
+	}
+
+	-> create a subclass that extends Thread class
+	-> overrride the run() method to specify the running behavior of 		the thread
+
+		MyThread mt1 = new MyThread();
+		mt1.start();
+
+	-> start() method will invoke the run() method
+
+	-> a newly created thred will be in NEW (born) state
+	-> by calling start() method, thread moves into RUNNABLE state
+
+b. by implementing Runnable interface
+
+	public class MyRunnableThread implements Runnable{
+
+		public void run(){
+			//code/statement that you would like to execute
+				inside a thread
+		}
+	}
+
+	MyRunnableThread r1 = new MyRunnableThread();
+	Thread t1 = new Thread(r1);
+	t1.start();
+
+
+
+
+
+	Thread t1 = new Thread();
+
+	Thread t1 = new Thread(Runnable target)
+
+	Thread t1 = new Thread(Runnable target, String name)
+
+
+
+
+	Thread t = new Thread(){
+		public void run(){
+			sop("this is my thread");
+		}
+	};
+	t.start();
+
+
+*=> How to pause a thread
+--------------------------------
+
+	-> we can make the currently running thread pauses the execution 
+
+
+		Thread.sleep(10000);
+
+
+* how to join to a thread
+-------------------------------
+	- join() method causes the current thread wait for the other 		thread to complete before it continues
+
+
+* How to interrupt a thread
+-----------------------------------------------------------
+	-> interrupting a thread can be used to stop/resume the execution 		of a thread;
+
+
+		t.interrupt()
+
+
+
+Angular Framework
+----------------------
+
+==>Component
+
+	-> components are also directives with template
+	-> component directive instructs DOM to render the template 		wherever the selector is used
+
+	<selector></selector>
+
+	<h1>this is text</h1>
+
+	<p>this is text</p>
+
+==> Directives
+-----------------------
+
+	-> directives are instructions to the DOM
+	
+	-> attribute directives
+
+		-> directives are used to enhance the behavior of certain 			element
+
+
+		<element directiveName> </element>
+
+		<div app-greenify></div>
+
+		<div app-hightlight="yellow"></div>
+
+		<div [ngStyle]="somestyle">
+
+	-> structural directives
+		-> used to manipulate the DOM
+
+	-> component directives
+
+
+
+1. *ngIf directive
+---------------------
+	-> show/hide elements conditionally
+
+	<div *ngIf="boolean_expression"> 
+		this content will be displayed if the condition is true  
+	</div>
+
+	<div *ngIf="true"> 
+		this is always displayed
+	</div>
+
+
+2. *ngIf with else
+-------------------------
+
+
+	<div *ngIf="condition;else localRef">
+		show this content if condition is true
+	</div>
+
+	
+	<ng-template #localRef>
+	    <div>
+		show this content if condition is false
+	    </div>
+	</ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
