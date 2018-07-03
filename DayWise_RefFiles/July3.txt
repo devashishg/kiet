@@ -1,0 +1,382 @@
+JDBC - Java Database Connectivity
+------------------------------------------
+
+
+	SQL					PL/SQL
+
+   - structured query language			- Procedural language
+   - commands					- programs		
+   - clauses					- conditions
+   - joins					- loops
+   - co related queries				- exceptions
+   - index					- functions
+   - triggers					- procedures
+   - constraints
+
+select * from students
+	where
+	group by
+	order by
+	...
+	...
+
+ODBC
+-----------------
+	- Open Database Connectivity
+	- developed by Microsoft
+
+	- allows applications to access database system
+
+	- only connects with few databases
+	- not vendor specific
+	- being platform independent java depends on ODBC
+
+
+JDBC API
+----------------
+	- JDBC is an API / specification for connecting java programs to 			the database systems
+
+	- java.sql package provides the jdbc api
+
+	- DriverManager class
+		-> manages database drivers
+
+	- Driver object
+		-> is responsible to communicate with the database
+
+	- Connection object
+		-> Represents the communication/connection with the 					database
+		
+	-> Statement Object
+		-> it represents the sql commands to be submitted to the 				db
+
+	-> ResultSet Object
+		-> this object represents the data retrived from the 					database 
+
+
+	class OracleDriver implements Driver {
+
+		..
+		..
+	}
+
+
+	Driver driver = new OracleDriver();
+
+Types of Driver
+----------------------------
+	-> JDBC Driver is an implementation of Driver interface 
+
+	1. Type I - ( JDBC - ODBC Bridge Driver)
+	2. Type II - (Native API Driver)
+	3. Type III - (JDBC-Net Driver)
+	4. Type IV - (Thin Driver / Native - Protocol Driver / Pure java driver)
+
+Type I - ( JDBC - ODBC Bridge Driver)
+--------------------------------------
+	-> type I driver, uses ODBC to communicate with db
+	-> type I driver translates JDBC calls into ODBC calls and then sends them 		to ODBC Driver
+
+	-> Advantages
+		- single driver implementation used to connect diff. databases
+		- it is vendor independent 
+
+	-> Disadvantages
+		- performance is slow due to lot of conversions
+		- the client system requires odbc installation and configuration
+		- not good for the webapplication
+
+ Type II - (Native API Driver)
+------------------------------------
+	-> type II uses native libraries provided by database vendors
+	-> in type II, the jdbc calls are converted to native C/C++ api calls
+	-> it is vendor specific 
+
+	-> Advantages
+		- better performance than type I
+
+	-> disadvantages
+		-> native api must be installed on every client 
+		-> if we change db, we have to change native api
+		-> not thread safe
+		-> db specific functions are executed on client jvm, and any 			bug/exception may crash jvm since the api is written in 			C/C++
+		
+Type III - (JDBC-Net Driver / pure java driver)
+--------------------------------------------------
+	-> in type III , the requests to access db are passed through network using 		the middle-tier / middleware server, then this middleware 			translates the requests to db
+
+	-> 3-tier approach is used to access the db
+
+	-> advantages
+		-> supports 3-tier architecture
+		-> used to web programming
+		-> server-based driver, no need for any vendor db library 
+		-> migration from one db to other db is easy
+	
+	-> disadvantages
+		-> it requries a server applications, which is very costly
+
+Type IV - (Thin Driver / Native - Protocol Driver / Pure java driver)
+-------------------------------------------------------------------------
+
+	-> pure java based driver which communicates directly to the db
+	-> vendor will provide the implementation the jdbc api in the form of a 		jar file
+	-> it translates the jdbc calls to db specific calls directly
+
+
+	-> advantages
+		-> no need any plugin/library
+		-> no need to install any library
+		-> it doesn't require any middleware
+
+Steps to connect with the database
+--------------------------------------------
+
+	1. Load the database Driver in the memory
+		
+		database name			driver class name
+
+		oracle 				oracle.jdbc.OracleDriver
+
+		mysql				com.mysql.jdbc.Driver
+
+		db2				COM.ibm.db2.jdbc.net.DB2Driver
+
+
+		-> the Class.forName() method is used to load the driver class in 			the memory 	
+
+
+			Class.forName("oracle.jdbc.OracleDriver");
+		
+
+	2. create / establish the Connection with the db
+	
+		-> DriverManager.getConnection() method is used to create a 			Connection object
+
+		
+	Connection   getConnection(String dburl, String uname, String pass)
+
+	
+		Database		dburl
+
+		oracle			jdbc:oracle:thin:@localhost:1521:xe
+
+		mysql			jdbc:mysql://localhost/dbname
+
+		db2			jdbc:db2:localhost:port/dbname
+
+		access/odbc		jdbc:odbc:dsname
+		
+
+	3. Create Statement object 
+
+		-> Statement object represents the sql commands to be submitted to 			the db
+		-> There are three types of Statement objects
+
+			1. Statement 
+
+			      Statement  st = con.createStatment()
+				
+			2. PreparedStatement
+			3. CallableStatement
+
+	4. Execute the Statement 
+		-> to execute sql commands the Statement Object provides following 				methods
+
+		
+		int executeUpdate(String sql)
+			-> used to submit/execute INSERT/UPDATE/DELETE commands
+			-> it returns an int value, which represents number of 						rows/records updated
+
+		ResultSet executeQuery(String sql)
+			-> used to perform SELECT operations
+			-> used to fetch data from db
+			-> it returns object of ResultSet, which represents the 				table of data fetched
+
+		boolean execute(String sql)
+			-> used to submit/execute any sql command 
+			-> returns true, if the sql command is SELECT and it 				creates the ResultSet object
+
+	5. close the connection
+
+		close() method is used to close the connection
+
+
+
+
+==> Insert Operation
+
+	Statement st = con.createStatement();
+			
+	String sql = "INSERT INTO employees VALUES(1, 'Prakhar', 'Delhi', 						1000.00)";
+			
+	int result = st.executeUpdate(sql);
+			
+	if(result>0) {
+		System.out.println("\n\t Record is inserted!");
+	}else {
+		System.out.println("\n\t Not Inserted");
+	}
+	
+==>Update Operation
+---------------------
+
+	
+	String name = "Siddhant";
+	int id = 4;
+
+	String sql = "UPDATE employees SET ename='"+name+"' WHERE empid="+id;
+
+
+
+	String sql = "UPDATE employees SET ename='"+name+"' WHERE empid="+id;
+	int result = st.executeUpdate(sql);
+		    
+	if(result>0)
+		System.out.println("\n\t Record updated");
+	 else
+		System.out.println("\n\t Records not updated");
+			
+==> Delete operation
+------------------------------
+
+	String sql = "DELETE FROM employees WHERE empid=2";
+	
+	int result = st.executeUpdate(sql);
+
+	if(
+
+=> Select operation
+--------------------------
+
+	-> ResultSet Object
+		-> it represents the table of data retrieved from the database
+		-> ResultSet object has a cursor that by default points to the row 			before 1st row
+
+		-> .next() method advances the resultset cursor and returns true if 			there is next record found
+
+		-> the getXXX(int) methods are used to fetch data from the current 			row based on the given column index / field name
+
+		String sql = "Select * from employees";
+		ResultSet rs = st.executeQuery(sql);
+
+		rs.next()
+
+	1	2		3	4
+	empid	ename		city	salary
+
+
+
+-->	1	Prakhar		Delhi	1000
+	2	Ananya		umbai	1500
+	3	Anshika		Pine	1200
+	4	Siddhant	Pune	2100
+
+
+
+
+
+
+		String sql = "Select ename, salary from employees";
+		ResultSet rs = st.executeQuery(sql);
+	
+		1		2
+		ename		salary
+
+		vishal		1000
+		vinod		1000
+
+	
+		String sql = "Select salary, city from employees";
+		ResultSet rs = st.executeQuery(sql);
+	
+
+
+
+
+
+PreparedStatement Object
+--------------------------------------
+					
+			Statement
+			   |
+			PreparedStatement 
+
+	-> PreparedStatement represents pre-compiled, parameterized queries 
+	-> a PS query may have parameters 
+	-> PS object represents only query at a time 
+			
+
+	1. load driver
+	2. create connection 
+
+	3. Create PS Object 
+
+		String sql = "INSERT INTO employees VALUES(?, ?, ?, ?)";
+		PreparedStatment ps = con.prepareStatement(String sql);
+
+	4. Supply values for placeholders/parameters
+		
+		ps.setXXX(int index, V value)
+
+		ps.setInt(1, 5);
+		ps.setString(2, "Anchal");
+		ps.setString(3, "Delhi");
+		ps.setDouble(4, 1200.00);
+
+	5. Execute the statement 
+
+		int executeUpdate()
+
+		ResultSet executeQuery()
+
+		boolean execute()
+
+CallableStatement Object
+-------------------------------
+	-> used to call/execute Stored Procedures/functions 
+
+
+	1. load driver
+	2. create connection 
+	3. create CallableStatement object
+
+		String sql = "{call INSERTEMPL(?,?,?,?)}";
+		CallableStatement cs = con.prepareCall(sql);
+
+	4. supply values for the placeholders
+
+		cs.setXXX(index, value)
+
+	5. execue the statment 
+
+		boolean execute();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
