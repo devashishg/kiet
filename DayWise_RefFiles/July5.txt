@@ -1,0 +1,361 @@
+Servlet and JSP
+---------------------------------
+
+	Client Side tools/Scripting
+
+		HTML5
+		   - "what" contents you want place on your webpage
+		   - it is responsible to define the structure of the webpage
+
+		CSS3
+		  - "how" content should appear on your webpage
+		  -  it is responsible to define the 'style rules' for the webpage
+		
+		JavaScript 1.5 / ES5
+		  - used to provide functionalities on your webpage
+			
+			- DOM manipulation
+			- Event Handling
+			- Form Validation
+			- Business Logic
+		
+		ES6 - ECMAScript 2015 - javascript 2.0 - advance javascript
+
+		
+		jQuery
+			-> it is a javascript library
+			-> open source, light weight, cross browser, fast 
+			-> simplifies javascript tasks
+
+		Bootstrap
+			-> html5+css3+jquery
+			-> it is a library to create responsive web applications 
+		
+		Angular / EmberJS / ReactJS / VueJS
+
+
+
+	Server Side tools/technologies
+
+		Java		Servlet/JSP		Struts/Spring MVC
+
+		C#/VB		asp.net			asp.net MVC
+
+		Python		django
+
+		php		symphony/zend/laravel
+
+		Javascript	node/expressjs
+
+
+
+
+	Language		Library/API		Framework
+
+	java			Servlet/jsp		spring / struts / hibernate
+
+
+
+	www.trainervishal.com/tomcat.zip
+
+Process flow of a Web Application
+---------------------------------------
+
+
+Web Application
+-------------------------------
+	-> an application, which executes on client-server architecture
+
+
+What are technologies used on Server
+-------------------------------------------
+
+	CGI - Common Gateway Interface
+		-> in cgi, for every request a new process is created
+		-> if the number of requests increases, it takes more time for sending 			the response
+
+	Servlet/JSP
+		-> Servlet uses threads for request processing
+
+	ASP.NET
+		-> supports only windows server
+
+	PHP
+		-> cross browser
+
+	Node/ExpressJS
+
+	Python
+
+
+
+What is Servlet
+-------------------
+	-> Servlets are used to create Server side web applications
+	-> Servlet is a java class, which is used to process the request and create the 		response
+
+	-> Servlet is a java object, that responds to the 'HTTP REQUESTS'
+	-> The Servlet object is executed by 'Servlet Container'
+	-> the 'Servlet Container' is a Web Server Application i.e. tomcat / glassfish / 		resin / web sphear/ web logic etc.
+
+
+	-> The Servlet Container manages multiple web applications
+
+Advantages of Servlet
+----------------------------
+	-> it creates threads for handling mulitple request
+	-> better performance
+	-> poratability
+	-> Robust
+	-> Secure
+
+
+What does a Server do?
+-------------------------
+	-> a server takes the client's request and gives something back to the client
+	-> when it receives a request, it finds that resource, and returns the same to 		the client
+	
+
+What does a client do?
+---------------------
+	-> a client makes a request 
+	-> and when response comes from the server, the client will render that response
+
+
+HTTP
+----------------------
+	-> HTTP allows web servers and browsers to exchange data over network
+	-> HTTP uses TCP connections by default
+
+	-> HTTP protocol is a stateless protocol, means each request is considered new 		request
+
+
+	https://www.google.co.in/search?q=java+servelet
+
+
+
+REQUEST object
+------------------
+	GET /login.jsp?username=abc&pass=abc
+	Host:www.xyz.com
+	User-Agent:Mozilla/5.0
+	Accept:text/xml, text/html, text/plain
+
+
+RESPONSE object
+------------------
+
+	HTTP/1.1 200 OK
+	ContentType : text/html
+	....
+
+
+Server Applications / Web Containers / Servlet Containers / Server
+-----------------------------------------------------------------------
+
+	-> Servlet Containers are used to executing Servlet / JSP / struts / JSP etc.
+
+
+	Apache Tomcat		: open source
+				  Web Server
+
+	JBOSS			: open source from JBoss community 
+				  Application Server
+
+	GlassFish		: provided by Sun Microsystems, now acquired by Oracle 
+
+	WebLogic		: Provided by Oracle
+
+	WebSphear		: Provided IBM
+
+Servlet API
+------------------
+	-> Servlet api is provided through javax.servlet package
+
+
+Servlet application life cycle stages
+-----------------------------------
+
+	1. Loading the Servlet
+	
+	2. Instantiation of Servlet (Create Servlet Object)
+
+	3. Initialization of Servlet - calling init()
+
+	4. Request Processing - calling service(req, res) 
+
+	5. Destroying the Servlet - destroy() 
+
+Helloworld Servlet Application
+------------------------------------
+
+	1. Create directory structure
+	
+	c:\...\tomcat\webapps\kietapp1
+				|
+				|->WEB-INF
+				|    |
+				|    |->web.xml
+				|    |	   |-> is a deployment descriptor file
+				|    |
+				|    |->classes
+				|    |	   |-> store all the .class files
+				|    |	   |-> store all the Servlet classes
+				|
+				|-> all other files / directories
+				|-> .html files
+				|-> .css files
+				|-> images
+				|-> other files
+
+	2. Create Servlet class
+
+		-> There are three ways to create a Servlet
+
+			a. by implementing Servlet interface
+			b. by extending GenericServlet class
+			c. by extending HttpServlet class
+
+			Servlet interface
+				|
+				|
+			GenericServlet (abstract)
+				|
+				|
+			HttpServlet (abstract)
+
+
+	
+		public class MyServlet implements Servlet {
+
+			public void init(ServletConfig config){
+
+			}
+
+			public void service(ServletRequest req, ServletResponse res){
+	
+			}
+
+			public void destroy(){
+
+			}
+
+			public ServletConfig getServletConfig(){
+				return null;
+			}
+
+			public String getServletInfo(){
+				return "";
+			}
+
+		}
+
+	3. Create the Deployment descriptor file (web.xml)
+
+		<web-app>
+			<servlet>
+			    <servlet-name>kietservlet1</servlet-name>
+			    <servlet-class>MyServlet</servlet-class>
+			</servlet>
+			<servlet-mapping>
+				<servlet-name>kietservlet1</servlet-name>
+				<url-pattern>/kiet1</url-pattern>
+			</servlet-mapping>
+			
+		</web-app>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
