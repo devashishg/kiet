@@ -1,0 +1,290 @@
+ResultSet
+--------------------
+
+	-> ResultSet object represents a table of data fetched from 		database using select command
+	-> ResultSet object has a cursor, which points to the row before 		1st row by default
+	-> .next() method moves the cursor to next record, return true if 		record found
+	-> .getXXX(index) or .getXXX(cname) reads the values from the 		current record
+
+		Statement st = con.createStatement();
+		PreparedStatement ps = con.prepareStatement(sql);
+		CallableStatement cs = con.prepareCall(sql);
+
+ResultSet Types
+-------------------------
+	
+	1. ResultSet.TYPE_FORWARD_ONLY
+	2. ResultSet.TYPE_SCROLL_INSENSITIVE
+	3. ResultSet.TYPE_SCROLL_SENSITIVE
+
+	TYPE_FORWARD_ONLY
+	-----------------
+		-> the ResultSet can only be navigated in forward 			direction
+		-> the default type is TYPE_FORWARD_ONLY
+
+	
+	TYPE_SCROLL_INSENSITIVE
+	-------------------------
+		-> ResultSet can be navigated in both forward and backward 			directions
+		-> you can jump to any position relative to the current 			position
+		-> the ResultSet is insensitive to changes in the 			underlying data source while the resultset is open
+
+	TYPE_SCROLL_SENSITIVE
+	---------------------------
+		-> ResultSet can be navigated in both forward and backward 			directions
+		-> you can jump to any position relative to the current 				position
+		-> the ResultSet is sensitive to changes in the 					underlying data source while the resultset is open
+
+
+	1	Prakhar		Delhi		1000
+	2	Ananya		Mumbai		1500
+	3	Anshika		Pine		1200
+	4	Siddhant	Pune		2100
+--->	5	Vishal		Pune		10000
+	6	Vipul		Pune		10000
+	7	Raju		Mumbai		2000
+	8	Vinay		Bangalore	3000
+
+ResultSet Concurrency
+---------------------------
+	-> it determines whether the ResultSet can be updated or not.
+
+		1. ResultSet.CONCUR_READ_ONLY
+		2. ResultSet.CONCUR_UPATABLE
+	
+
+Statement st = con.createStatement(TYPE, CONCUR);
+
+PreparedStatement ps = con.prepareStatement(sql, TYPE, CONCUR);
+
+CallableStatement cs = con.prepareCall(sql, TYPE, CONCUR);
+
+
+String sql = "SELECT empid, ename, city, salary FROM employees";
+	
+PreparedStatement ps = con.prepareStatement(sql, 
+			     ResultSet.TYPE_FORWARD_ONY, 
+			     ResultSet.CONCUR_READ_ONLY);
+ 
+
+PreparedStatement ps = con.prepareStatement(sql, 
+			     ResultSet.TYPE_SCROLL_INSENSITIVE, 
+			     ResultSet.CONCUR_READ_ONLY);
+
+
+PreparedStatement ps = con.prepareStatement(sql, 
+			     ResultSet.TYPE_SCROLL_INSENSITIVE, 
+			     ResultSet.CONCUR_UPDATABLE);
+
+
+PreparedStatement ps = con.prepareStatement(sql, 
+			     ResultSet.TYPE_SCROLL_SENSITIVE, 
+			     ResultSet.CONCUR_UPDATABLE);
+
+
+
+ResultSet Navigation Methods
+----------------------------------
+
+	.next()		: moves cursor to next record
+
+	.previous()	: moves cursor to previous record
+
+	.first()	: moves cursot to first record
+
+	.last()		: moves cursor to last record
+
+	.absolute(rownum)	: moves cursor at an absolute position
+
+	.afterLast()	: moves cursor to row after last row
+
+	.beforeFirst()	: moves cursor to row before first row
+
+	.relative(num)	: moves cursor to a position relative to its 				current position
+
+
+Updating a row using resultset
+------------------------------------
+	rs.first();
+	System.out.println(rs.getInt(1) + "\t" + rs.getString(2) + "\t" + 		rs.getString(3) + "\t" + rs.getDouble(4));
+
+	rs.updateString(3, "Mumbai");
+	rs.updateDouble(4, 5000.00);
+	rs.updateRow();
+	System.out.println(rs.getInt(1) + "\t" + rs.getString(2) + "\t" + 		rs.getString(3) + "\t" + rs.getDouble(4));
+
+
+Deleting a row using resultSet
+-----------------------------------------
+
+	rs.next();
+	System.out.println(rs.getInt(1) + "\t" + rs.getString(2) + "\t" + 		rs.getString(3) + "\t" + rs.getDouble(4));
+	rs.deleteRow();
+
+Inserting a row using resultset
+------------------------------------
+
+	1. rs.moveToInsertRow();
+		-> it creates an empty row and moves the cursor to that 			empty row
+	2. update row column values using updateXXX() method
+
+		rs.updateInt(1, 9);
+		rs.updateString(2, "Anshika");
+		rs.updateString(3, "Delhi");
+		rs.updateDouble(4, 2000);
+
+	3. rs.insertRow();
+
+
+
+
+	mysql driver
+	"com.mysql.jdbc.Driver"
+
+
+	mysql db url
+	jdbc:mysql://localhost/dbname
+
+
+Storing an Image into Database
+---------------------------------
+	-> to store a file/image into db, we can use PS / CS
+	-> in db, we use BLOB/CLOB data types are used to store 		files/images (large amount of binary data)
+
+	-> setBinaryStream() method of PS/CS is used to set Binary 		information in the parameter index
+
+
+
+	void setBinaryStream(int paramIndex, InputStream stream) 
+
+	void setBinaryStream(int paramIndex, InputStream stream, long 								length) 
+
+---------------------------------------------------------------------------
+
+Angular
+-----------------
+		
+		<ul>
+			<li *ngFor="let server of servers">
+				{{ server.instanceType }}
+				{{ server.status }} 
+				{{ server.started }}
+			</li>	
+
+		</ul>
+
+Pipes
+------------
+	-> pipes are used to format the output in template
+	-> pipes are used to transform the output into a specific 				format
+
+	-> {{ expression | pipename }}
+
+Built-in pipes
+--------------------
+	-> date
+	-> uppercase
+	-> lowercase
+	-> number
+	-> currency
+
+
+Pipe chaining
+--------------------
+
+	{{ expression | date | uppercase }} 
+
+
+Parameterized pipes
+----------------------------
+
+	-> date pipe
+
+		{{ birthday | date : 'fullDate' }}
+
+
+Custom Pipe
+---------------
+	
+		{{ name | shorten }}
+
+	1. create a new .ts file
+		
+		shorten.pipe.ts
+		--------------------
+		import { Pipe } from '@angular/core';
+
+		@Pipe({
+		   name : 'shorten'
+		})
+		export class ShortenPipe {
+
+		}
+	2. implement PipeTransform interface
+		..
+		..
+		export class ShortenPipe implements PipeTransform{
+
+		}
+
+	3. override the transform() method to transform the output
+
+	export class ShortenPipe implements PipeTransform{
+
+		transform(value){
+			return value.substr(0,5);
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
