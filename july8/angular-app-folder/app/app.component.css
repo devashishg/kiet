@@ -1,0 +1,9 @@
+.myform {
+  border: 1px solid gray;
+  padding: 20px;
+}
+
+input.ng-touched.ng-invalid{
+  border:1px solid red;
+  color:red;
+}

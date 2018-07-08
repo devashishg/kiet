@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+
+<filter>
+  <filter-name>CorsFilter</filter-name>
+  <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+</filter>
+<filter-mapping>
+  <filter-name>CorsFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+</filter-mapping>
+
+
+  <display-name>ServletDemo2</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>MyServlet2</display-name>
+    <servlet-name>MyServlet2</servlet-name>
+    <servlet-class>com.kiet.MyServlet2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MyServlet2</servlet-name>
+    <url-pattern>/MyServlet2</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProcessServlet</display-name>
+    <servlet-name>ProcessServlet</servlet-name>
+    <servlet-class>ProcessServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProcessServlet</servlet-name>
+    <url-pattern>/ProcessServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RegisterEmployeeServlet</display-name>
+    <servlet-name>RegisterEmployeeServlet</servlet-name>
+    <servlet-class>com.kiet.RegisterEmployeeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegisterEmployeeServlet</servlet-name>
+    <url-pattern>/regemp</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>getAllEmployeesServlet</display-name>
+    <servlet-name>getAllEmployeesServlet</servlet-name>
+    <servlet-class>com.kiet.getAllEmployeesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getAllEmployeesServlet</servlet-name>
+    <url-pattern>/getallemp</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetEmpServlet</display-name>
+    <servlet-name>GetEmpServlet</servlet-name>
+    <servlet-class>GetEmpServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetEmpServlet</servlet-name>
+    <url-pattern>/GetEmpServlet</url-pattern>
+  </servlet-mapping>
+</web-app>
