@@ -1,0 +1,257 @@
+Servlet
+---------------
+
+Content-Type
+-----------------
+	-> Content type is also called MIME type (Multipurpose Internet 			Mail Extension)
+	-> it is a HTTP header that provides the description about what 		the server is sending back to the client
+
+	-> Content types
+		text/html
+		text/plain
+		application/msword
+		application/jar
+		application/pdf
+		application/x-zip
+		images/jpeg
+		images/png
+		audio/mp3
+		video/mp4
+
+HTTP Request and Response
+-------------------------------
+	-> HTTP defines a set of request methods to indicate desired 				action be performed on a given resource
+
+	-> Request methods
+
+		1. GET
+			-> is used to retrieve information from the server 				using the given url
+			-> it is the default request method
+			-> in GET request the form data is sent to server 				in the form of query parameters in the url
+			-> the amount of data to be sent is limited
+
+		2. POST
+			-> is used to sent data to the server
+			-> in POST request the data is added to the 						request body
+			->the amount of data is unlimited
+
+
+		3. PUT
+			-> used to perform update operations
+			-> the PUT method replaces all the current 						representations of the target resource 							with the request payload
+
+		4. DELETE 
+			-> used to perform delete operations
+			-> it deletes the specified resource
+
+		5. PATCH
+			-> used to perform update operations
+			-> used to apply partial modifications to a 						resource
+
+
+ht.....ServletDemo2/regemp?empid=16&ename=aaa&city=aaa&sal=1000
+
+https://www.google.co.in/search?q=java+servlet&oq=java+servlet&aqs=chrome..69i57j0l5.1788j0j8&sourceid=chrome&ie=UTF-8
+
+
+	-> Response
+		-> After receiving and interpreting a request, a server 			responds with an HTTP response object
+
+		-> Response Header
+			-> specifies the content type, http version, 				status code etc.
+
+
+		-> Status Code
+			1XX : Informational
+				-> it means the request was received and 					is being processed
+
+			2XX: Success
+				-> it means the action was successfully 					received 
+
+			3XX:Redirection
+				-> it means further action must be taken 					in order to complete the request
+
+			4XX: Client Error
+				-> it means the request contains incorrect 
+					syntax or cannot be fulfilled
+
+			5xx:Server Error
+				-> it means the server failed to fulfill 					the request
+				
+Servlet Life Cycle
+------------------------
+	1. Loading the Servlet class
+		-> the container reads web.xml file, and based on the 					url-pattern appropriate servlet class is loaded in 					the memory 
+
+	2. Instantiation (Create instance of Servlet)
+		
+		-> When the Servlet class is loaded, the Servlet Container 			creates instance of the Servlet class
+		-> only a single instance is of Servlet class created 
+		
+	3. Initialization (call the Servlet's init())
+
+		public void init(ServletConfig config){
+
+		}
+
+		-> this method is called only once
+		-> it accepts ServletConfig as a parameter
+		-> in this init() method we can write some initialization 			code..i.e create connections, open file etc.
+
+	4. Request Processing (call the Servlet's service() or doXXX() )
+
+		-> Service() method is used to process the request and 			create the response
+
+	public void service(ServletRequest req, ServletResponse res){
+
+	}
+
+	5. Destroy Servlet (call the Servlet's destroy() )
+
+		-> when a servlet is unloaded by the servlet container, 			its destroy() method is called
+
+
+Servlet API
+-------------------
+	-> javax.servlet and javax.servlet.http package provide interfaces 		and classes
+
+Creating a Servlet
+------------------------
+
+1. by implementing Servlet Interface
+
+	-> implement all the methods of Servlet Interface
+
+2. by extending GenericServlet
+
+	-> implement service() method
+
+3. using HttpServlet
+		
+	-> it supports only HTTP protocol
+	-> HttpServlet provides request specific methods 
+
+	public class MyServlet extends HttpServlet {
+
+		public void doGet(HttpServletRequest req, 					HttpServletResponse res){
+			
+		}
+
+		public void doPost(HttpServletRequest req, 								HttpServletResponse res){
+
+		}
+
+		public void doXXX(HttpServletRequest req, 								HttpServletResponse res){
+
+		}
+	}
+
+-> ServletRequest   or    HttpServletRequest
+	
+	-> it represents the client's REQUEST
+	-> the Servlet Container creates object of ServletRequest / 		HttpServletRequest and pass it to service() or doXXX() method
+
+
+-> ServletResponse    or    HttpServletResponse 
+	
+	-> -> it represents the RESPONSE object, which is to be sent to the 			client 
+
+	-> the Servlet Container creates object of ServletResponse / 				HttpServletResponse and pass it to service() or doXXX() method
+
+	-> inside service() / doXXX() methods we write some output on the 			these response objects
+
+
+Methods of ServletRequest / HttpServletRequest
+------------------------------------------------
+
+	String getParameter(paramname);
+
+
+Methods of ServletResponse / HttpServletResponse
+-------------------------------------------------
+
+	PrintWriter getWriter();
+
+
+init Parameters
+-------------------------
+
+	-> in web.xml file, we can define init parameters for each servlet 
+	-> web.xml file...
+
+		<servlet>
+			<servlet-name>xxx</servlet-name>
+			<servlet-class>DemoServlet2</servlet-class>
+			<init-param>
+			   <param-name>dbdriver</param-name>
+			   <param-value>oracle.jdbc.OracleDriver</param-value>
+			</init-param>
+			<init-param>
+			   <param-name>url</param-name>
+			   <param-value> 				jdbc:oracle:thin:@localhost:1521:xe
+			</param-value>
+			</init-param>
+		</servlet>
+
+ServletConfig Object
+------------------------
+	-> this object is created by Servlet Container for each servlet
+	-> it is used to get configuration information (init parameters) from 		the web.xml file
+
+
+Context Parameters
+-------------------------
+
+	<web-app>
+
+		<context-param>
+			<param-name>dbdriver</param-name>
+			<param-value>oracle.jdbc.OracleDriver</param-value>
+		</context-param>
+
+		<context-param>
+			<param-name>collegename</param-name>
+			<param-value>KIET, Ghaziabad </param-value>
+		</context-param>
+
+		<servlet>
+			...
+		</servlet>
+		
+		...
+
+	</web-app>
+
+ServletContext object
+-------------------------
+	-> this object is created by servlet container 
+	-> it is used to get context parameters
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

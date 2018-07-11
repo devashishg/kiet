@@ -1,0 +1,74 @@
+RequestDispatcher
+----------------------
+	-> RequestDispatcher is an interface
+	-> it allows to transfer a request from one resource to another 		resource (i.e. html, servlet, jsp etc)
+	-> it is used to "include" the content of another resource or 		"forward" the request to another resource
+
+	public void foward(req, res)
+	
+	public void include(req, res)
+
+==> forward()
+----------------------
+
+	RequestDispatcher rd = request.getRequestDispatcher("urlofresource");
+	rd.foward(request, response);
+
+
+Session Management / State Management
+---------------------------------------
+
+	-> Session
+		-> HTTP protocol and Web Servers are stateless. 
+		-> for web server, every request is a new request
+		-> the server can't identiy if the request is coming fom 			client that has been sending the request previously
+
+		-> Session is a conversational state between client and 				server
+		-> following are the ways for Session management
+
+			a. cookies
+			b. url re-rewriting
+			c. html hidden field
+			d. Session Management API
+
+=> Session Management API
+-------------------------------
+	-> HttpSession interface provides Session Management 
+	-> for every request Servlet Container creates a HttpSession Object 		which has a unique identifier
+
+	     HttpSession  getSession()
+			-> returns a HttpSession object associated 						with the request
+		
+             String getId()
+			-> returns a string containing the unique identifier
+
+	     
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

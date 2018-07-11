@@ -1,0 +1,140 @@
+JSP - Java Server Pages
+----------------------------
+	-> used to create dynamic, platform independent server side web 		applications
+	-> it is an extension to Servlet
+
+	-> JSP page allows to embedd HTML code and java 
+
+	-> Easy to maintain
+
+	-> Fast development 
+
+	-> Less code than servlet
+
+	-> Additional features i.e. tag libraries, expression langualge, 		custom tags
+
+	-> easy to deploy
+
+Life Cycle of JSP Page
+----------------------------
+	-> jsp life cycle is managed by the container.
+
+	1. Translation of jsp to Servlet Code
+		-> Web container translates the JSP CODE into Servlet class
+
+			hello.jsp   -->  hello_jsp.java
+	2. Compilation 
+		-> the container compiles the generated .java file
+
+			hello_jsp.java	----> hello_jsp.class
+
+	3. Class Loading 
+		-> the .class file is loaded in the memory
+
+	4. Instantiation 
+		-> Container creates instance of the Servlet
+
+	5. Initialization
+		-> ServletRequest, ServletResponse, ServletConfig,
+		-> jspInit() method is called 
+
+	6. Request Processing
+		-> _jspService() method is called 
+
+	public _jspService(HttpServletRequest req, HttpServletResponse res){
+
+	}
+
+	7. destroy the object 
+		-> jspDestroy() method is called whenever the servlet class is 			unloaded from the memory
+
+first.jsp
+--------------
+	<@.....
+	<html>
+	   <head>
+		<title> first jsp page </title>
+	   </head>
+	   <body>
+		<h1> Welcome to JSP </h1>
+		<%
+		    int count = 1;	//local variable inside _jspService()
+		%>
+
+		<p> Count = <%=count%>  </p>		
+
+	   </body>
+	</html>
+
+first_jsp.java
+------------------
+	public class first_jsp extends HttpServlet {
+
+		public void _jspService(HttpServletRequest req, 					HttpServletResponse resp) {
+			PrintWriter out = resp.getWriter();
+			out.write("<html><head><title>....");
+
+			int count = 1;
+			out.write("<p> count  = " + count + "</p>");
+		}
+
+	}
+
+Life Cycle Methods
+---------------------------
+
+	1. jspInit()
+
+	2. _jspService(HttpServletReqeust request, HttpServletResponse resp)
+
+	3. jspDestroy()
+
+
+Types of Scripting Elements
+-----------------------------------
+
+	1. Scriptlet Tag
+
+		<%  --scriptlet tag--   %>
+		
+		-> Scriptlet tag is used to put java code in a jsp page
+
+	2. Expression Tag
+
+		<%=someexpression %>
+
+		-> print something dynamically in jsp page
+		
+		int data = 100;
+		<% out.print(data); %>
+
+		<%=data %>
+	
+
+	3. Declaration Tag
+
+		<%! declaration tag %>
+
+		-> declare class level variables and methods
+	
+	4. Directive Tag
+		-> used to give special instructions to the container while 			JSP page is translated
+
+		-> Types of directive tags
+			
+			a. <%@ page ... %>
+				-> define the page depedent properties
+
+			b. <%@ include ...%>
+				-> define file to be included
+
+			c. <%@ taglib ...%
+				-> define tag library used to in the page
+
+
+
+
+
+
+
+
