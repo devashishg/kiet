@@ -1,0 +1,77 @@
+Properties of page directive <%@ page ... %> 
+--------------------------------------------------
+
+1. import 
+	-> import other java classes 
+
+	<%@ page import="java.util.Date, java.util.ArrayList, java.io.*" %>
+
+2. contentType
+
+	-> it is used to set the contentType and character set of the 					response
+
+	<%@ page contentType="text/html" >
+
+3. extends
+	-> it is used to define the superclass of the generated Servlet Code
+
+
+4. errorPage
+	-> it is used to set the error page for the jsp. 
+
+5. isErrorPage
+	-> it is used to declare that the current jsp page is an error page
+
+
+Implicit Objects in JSP
+--------------------------------
+
+1. request
+	-> represents the HttpServletRequest Object associated with request
+
+2. response
+	-> represents the HttpServletResponse object  that is sent back to the 		client
+
+3. out
+	-> the JspWriter object associated with the output strem of the 		response
+
+4. session
+	-> the HttpSession object associated with the session for the given 		user request
+5. config
+	-> the ServletConfig object associated with the Servlet for current 		JSP page
+
+6. application 
+
+7. session 
+
+8. page
+
+9. exception
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

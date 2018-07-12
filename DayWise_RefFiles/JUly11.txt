@@ -1,6 +1,6 @@
 JSP - Java Server Pages
 ----------------------------
-	-> used to create dynamic, platform independent server side web 		applications
+	-> used to create dynamic, platform independent server side web 			applications
 	-> it is an extension to Servlet
 
 	-> JSP page allows to embedd HTML code and java 
@@ -11,7 +11,7 @@ JSP - Java Server Pages
 
 	-> Less code than servlet
 
-	-> Additional features i.e. tag libraries, expression langualge, 		custom tags
+	-> Additional features i.e. tag libraries, expression language, 			custom tags
 
 	-> easy to deploy
 
@@ -118,7 +118,7 @@ Types of Scripting Elements
 		-> declare class level variables and methods
 	
 	4. Directive Tag
-		-> used to give special instructions to the container while 			JSP page is translated
+		-> used to give special instructions to the container while 				JSP page is translated
 
 		-> Types of directive tags
 			
