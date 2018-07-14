@@ -1,0 +1,9 @@
+<Context>
+	<Resource name="oracledb"
+			  type="javax.sql.DataSource"
+			  maxActive="20" maxIdle="5" maxWait="10000"
+			  url="jdbc:oracle:thin:@localhost:1521:xe"
+			  username="system"
+			  password="manager"
+			  driverClassName="oracle.jdbc.OracleDriver" />
+</Context>
