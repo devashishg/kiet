@@ -1,0 +1,40 @@
+
+<form #empForm="ngForm" (ngSubmit)="onAddEmployee(empForm)" >
+
+  <div class="form-group">
+    <label for="eid">Empolyee ID:</label>
+    <input type="text" id="eid" class="form-control"
+                  name="empid"
+                  ngModel
+                  #empid="ngModel">
+  </div>
+
+  <div class="form-group">
+    <label for="en">Empolyee Name:</label>
+    <input type="text" id="en" class="form-control"
+              name="ename"
+              ngModel 
+              #ename="ngModel">
+  </div>
+
+  <div class="form-group">
+    <label for="ct">City:</label>
+    <input type="text" id="ct" class="form-control"
+                name="city"
+                ngModel 
+                #city="ngModel">
+  </div>
+
+  <div class="form-group">
+    <label for="sal">Salary:</label>
+    <input type="text" id="sal" class="form-control"
+              name="salary"
+              ngModel 
+              #salary="ngModel">
+  </div>
+
+  <div class="form-group">
+    <input type="submit" class="btn btn-primary active" value="Add Employee">
+  </div>
+
+</form>
